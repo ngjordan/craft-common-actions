@@ -102,7 +102,7 @@ class SonarCloudTests(unittest.TestCase):
             for step in steps:
                 if 'uses' in step:
                     with self.subTest(action=step['uses']):
-                        if step['uses'].startswith('storytold/craft-common-actions/'):
+                        if step['uses'].startswith('ngjordan/craft-common-actions/'):
                             self.assertTrue(step['uses'].endswith('@main'))
                         else:
                             self.assertRegex(step['uses'], r'^[^@]+@[0-9a-f]{40}$')

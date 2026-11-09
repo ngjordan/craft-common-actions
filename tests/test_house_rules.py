@@ -172,7 +172,7 @@ class HouseRulesWiringTests(unittest.TestCase):
         self.assertEqual(source["with"]["repository"], "storytold/craft-contrib")
         self.assertEqual(source["with"]["ref"], "main")
         self.assertEqual(source["with"]["fetch-depth"], "0")
-        self.assertEqual(check["uses"], "storytold/craft-common-actions/actions/house-rules@main")
+        self.assertEqual(check["uses"], "ngjordan/craft-common-actions/actions/house-rules@main")
         self.assertEqual(check["with"]["require-rust"], "${{ inputs.rust }}")
 
 

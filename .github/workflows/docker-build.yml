@@ -7,7 +7,7 @@ name: "Docker build"
 # autocraft, and font-preview-service (multi-arch, GHCR and Docker Hub).
 #
 #   docker-publish:
-#     uses: storytold/craft-common-actions/.github/workflows/docker-build.yml@main
+#     uses: ngjordan/craft-common-actions/.github/workflows/docker-build.yml@main
 #     with:
 #       images: |
 #         ghcr.io/storytold/font-preview-service

@@ -50,7 +50,7 @@ concurrency:
 
 jobs:
   release:
-    uses: storytold/craft-common-actions/.github/workflows/release.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/release.yml@main
     with:
       app-name: photocraft
       app-title: PhotoCraft
@@ -130,13 +130,13 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
-    uses: storytold/craft-common-actions/.github/workflows/refresh-contributors.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/refresh-contributors.yml@main
   release:
     needs: credits
     permissions:
       contents: write
       packages: write
-    uses: storytold/craft-common-actions/.github/workflows/release.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/release.yml@main
     with:
       app-name: effectcraft
       app-title: EffectCraft
@@ -215,7 +215,7 @@ Build provenance, a CycloneDX SBOM, and a Sigstore signature of the published fi
       id-token: write
       attestations: write
       artifact-metadata: write
-    uses: storytold/craft-common-actions/.github/workflows/supply-chain.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/supply-chain.yml@main
     with:
       version: ${{ needs.release.outputs.version }}
 ```
@@ -274,7 +274,7 @@ concurrency:
 
 jobs:
   lint:
-    uses: storytold/craft-common-actions/.github/workflows/packaging-lint.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/packaging-lint.yml@main
 ```
 
 ### 3. `windows-arm64.yml`
@@ -317,7 +317,7 @@ permissions:
 
 jobs:
   windows-arm64:
-    uses: storytold/craft-common-actions/.github/workflows/windows-arm64.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/windows-arm64.yml@main
     with:
       app-name: wordcraft
       app-dir: WordCraft
@@ -436,7 +436,7 @@ permissions:
 
 jobs:
   freebsd:
-    uses: storytold/craft-common-actions/.github/workflows/freebsd.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/freebsd.yml@main
     with:
       require-craft-fonts: true
 ```
@@ -472,7 +472,7 @@ concurrency:
 
 jobs:
   nix:
-    uses: storytold/craft-common-actions/.github/workflows/nix.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/nix.yml@main
 ```
 
 ### 6. `gate.yml`
@@ -501,7 +501,7 @@ check, can be a second call with its own `command`, `os`, `tools` and `targets`,
 
 ```yaml
   web:
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/gate.yml@main
     with:
       cache-version: v1-web
       os: '["ubuntu-24.04"]'
@@ -533,7 +533,7 @@ concurrency:
 jobs:
   gate:
     # Tracks @main so suite-wide CI fixes reach every app without a PR in each repository.
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/gate.yml@main
     with:
       packages: >-
         pkg-config libxkbcommon-dev libwayland-dev libx11-dev libxcb1-dev libxcursor-dev
@@ -563,7 +563,7 @@ with per-OS environment and a shorter Windows gate (PDFCraft's call):
 ```yaml
 jobs:
   gate:
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/gate.yml@main
     with:
       os: ${{ (github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'full-ci')) && '["ubuntu-24.04","windows-latest"]' || '["ubuntu-24.04"]' }}
       craft-fonts-ref: 3d9ab3a132ed0eff457e424226a435a901da30d3
@@ -597,7 +597,7 @@ SHA256 kept in the action, since its releases publish none; pass `sha256` with a
 ```yaml
 jobs:
   ast-grep:
-    uses: storytold/craft-common-actions/.github/workflows/ast-grep.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/ast-grep.yml@main
 ```
 
 With the config and rules elsewhere, scanning only some paths:
@@ -605,7 +605,7 @@ With the config and rules elsewhere, scanning only some paths:
 ```yaml
 jobs:
   ast-grep:
-    uses: storytold/craft-common-actions/.github/workflows/ast-grep.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/ast-grep.yml@main
     with:
       config: lint/sgconfig.yml
       paths: apps crates
@@ -628,7 +628,7 @@ that workflow's concurrency group separate from the main gate's, so a label neve
 ```yaml
 jobs:
   windows-scope:
-    uses: storytold/craft-common-actions/.github/workflows/changed-paths.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/changed-paths.yml@main
     with:
       label: full-ci
       paths: |
@@ -637,7 +637,7 @@ jobs:
   gate-windows:
     needs: windows-scope
     if: needs.windows-scope.outputs.matched == 'true'
-    uses: storytold/craft-common-actions/.github/workflows/gate.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/gate.yml@main
     with:
       os: '["windows-latest"]'
       windows-command: cargo test -p my-windows-crate
@@ -649,7 +649,7 @@ Fails unless the app builds only from what its `Cargo.lock` names, and every git
 comes from `github.com/storytold`: `Cargo.lock` exists and is up to date with the manifests
 (`cargo metadata --locked`), and neither `.cargo/config.toml` nor the legacy `.cargo/config`
 replaces, patches or overrides a source (none of that shows up in `Cargo.lock`). It reports every
-problem it finds. This replaces the "Git dependencies come from storytold" job apps carried in
+problem it finds. This replaces the "Git dependencies come from ngjordan" job apps carried in
 their own `ci.yml`, `nix.yml` or `release.yml`; `working-directory` points it at a workspace that
 isn't the repository root.
 
@@ -657,10 +657,10 @@ isn't the repository root.
 ```yaml
 jobs:
   git-sources:
-    uses: storytold/craft-common-actions/.github/workflows/git-sources.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/git-sources.yml@main
   release:
     needs: git-sources
-    uses: storytold/craft-common-actions/.github/workflows/release.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/release.yml@main
 ```
 
 ### 10. `house-rules.yml`
@@ -680,7 +680,7 @@ craft-contrib out at `main` with full history.
 ```yaml
 jobs:
   house-rules:
-    uses: storytold/craft-common-actions/.github/workflows/house-rules.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/house-rules.yml@main
     with:
       rust: true
 ```
@@ -718,7 +718,7 @@ concurrency:
 
 jobs:
   publish:
-    uses: storytold/craft-common-actions/.github/workflows/docker-build.yml@main
+    uses: ngjordan/craft-common-actions/.github/workflows/docker-build.yml@main
     with:
       images: |
         ghcr.io/storytold/artcraft-services
@@ -751,7 +751,7 @@ Individual actions are also available for composing custom pipelines:
 - `actions/install-apt-packages`: Installs the given Ubuntu packages and keeps the downloaded `.deb` files in the Actions cache, so later runs install without the mirror download. By default only pushes to the default branch save the cache; PRs restore it. For an app's CI:
 
   ```yaml
-  - uses: storytold/craft-common-actions/actions/install-apt-packages@main
+  - uses: ngjordan/craft-common-actions/actions/install-apt-packages@main
     with:
       packages: pkg-config libxkbcommon-dev libwayland-dev mesa-vulkan-drivers
   ```
@@ -764,12 +764,12 @@ Individual actions are also available for composing custom pipelines:
 - `actions/setup-windows-signing`: Exports the shared Authenticode signing script (`CRAFT_SIGN_SCRIPT`) for the app's packaging step (see "Windows code signing").
 - `actions/ast-grep`: Installs a pinned ast-grep, runs the caller's rule tests and scans with its `sgconfig.yml` (see `ast-grep.yml`).
 - `actions/export-app-build-env`: Sets the app's own `<PREFIX>_VERSION`, `<PREFIX>_BUILD_DATE` and `<PREFIX>_BUILD_SHA` for the steps after it, with the prefix its `packaging/env.sh` reads (or `env-prefix`); its `names` output lists them for a VM's `envs`.
-- `actions/check-git-sources`: The check `git-sources.yml` runs, for a job that has already checked out the app; `allowed-prefix` changes where git dependencies may come from (default `git+https://github.com/storytold/`).
+- `actions/check-git-sources`: The check `git-sources.yml` runs, for a job that has already checked out the app; `allowed-prefix` changes where git dependencies may come from (default `git+https://github.com/ngjordan/`).
 - `actions/house-rules`: The check `house-rules.yml` runs. `source` is a checkout of craft-contrib with `main` history; `require-rust` asks for the Rust block as well as the core block.
 
 ## Storytold Organization Hosting
 
-This repository is hosted at `storytold/craft-common-actions` for all Storytold / ArtCraft craftapps.
+This repository is hosted at `ngjordan/craft-common-actions` for all Storytold / ArtCraft craftapps.
 
 ## App-specific packaging checks
 
@@ -796,7 +796,7 @@ Replace the app's import step with the action. It sets the same
 `MACOS_SIGN_IDENTITY` and `MACOS_KEYCHAIN` variables that `package.sh` already reads:
 
 ```yaml
-- uses: storytold/craft-common-actions/actions/import-macos-certificate@main
+- uses: ngjordan/craft-common-actions/actions/import-macos-certificate@main
   with:
     certificate: ${{ secrets.APPLE_CERTIFICATE }}
     certificate-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -888,7 +888,7 @@ available and the packaging script calls it with the signing secrets in its own 
 secrets never pass through the action:
 
 ```yaml
-- uses: storytold/craft-common-actions/actions/setup-windows-signing@main
+- uses: ngjordan/craft-common-actions/actions/setup-windows-signing@main
   with:
     product-name: PhotoCraft   # signtool /d; /du defaults to the repository's GitHub URL
 - run: ./packaging/windows/package.ps1 -Arch x64

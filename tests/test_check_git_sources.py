@@ -16,7 +16,7 @@ SCRIPT = ACTION_DIR / "check_git_sources.py"
 ACTION = yaml.load((ACTION_DIR / "action.yml").read_text(), Loader=yaml.BaseLoader)
 WORKFLOW = yaml.load((ROOT / ".github/workflows/git-sources.yml").read_text(), Loader=yaml.BaseLoader)
 
-STORYTOLD = "git+https://github.com/storytold/craft-libs?branch=main#0123456789abcdef0123456789abcdef01234567"
+STORYTOLD = "git+https://github.com/ngjordan/craft-libs?branch=main#0123456789abcdef0123456789abcdef01234567"
 REGISTRY = "registry+https://github.com/rust-lang/crates.io-index"
 
 
@@ -161,7 +161,7 @@ class CheckGitSourcesWiringTests(unittest.TestCase):
         self.assertNotIn("${{", step["run"])
         self.assertEqual(step["env"]["WORKSPACE_DIR"], "${{ inputs.working-directory }}")
         self.assertEqual(step["env"]["ALLOWED_PREFIX"], "${{ inputs.allowed-prefix }}")
-        self.assertEqual(ACTION["inputs"]["allowed-prefix"]["default"], "git+https://github.com/storytold/")
+        self.assertEqual(ACTION["inputs"]["allowed-prefix"]["default"], "git+https://github.com/ngjordan/")
 
     def test_the_workflow_checks_out_without_credentials_and_runs_the_action(self):
         job = WORKFLOW["jobs"]["git-sources"]
@@ -170,7 +170,7 @@ class CheckGitSourcesWiringTests(unittest.TestCase):
         checkout, check = job["steps"]
         self.assertTrue(checkout["uses"].startswith("actions/checkout@"))
         self.assertEqual(checkout["with"]["persist-credentials"], "false")
-        self.assertEqual(check["uses"], "storytold/craft-common-actions/actions/check-git-sources@main")
+        self.assertEqual(check["uses"], "ngjordan/craft-common-actions/actions/check-git-sources@main")
         self.assertEqual(check["with"]["working-directory"], "${{ inputs.working-directory }}")
 
 

@@ -5,7 +5,7 @@ name: "Changed paths"
 # caller reads `matched`:
 #
 #   windows-scope:
-#     uses: storytold/craft-common-actions/.github/workflows/changed-paths.yml@main
+#     uses: ngjordan/craft-common-actions/.github/workflows/changed-paths.yml@main
 #     with: { paths: "crates/wincolor/*", label: full-ci }
 #   gate-windows:
 #     needs: windows-scope

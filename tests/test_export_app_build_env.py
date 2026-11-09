@@ -124,7 +124,7 @@ class ReleaseWorkflowListsNoAppsTests(unittest.TestCase):
                     after += 1
                 export = steps[after]
                 self.assertEqual(export.get("id"), "app-env")
-                self.assertEqual(export["uses"], "storytold/craft-common-actions/actions/export-app-build-env@main")
+                self.assertEqual(export["uses"], "ngjordan/craft-common-actions/actions/export-app-build-env@main")
                 self.assertEqual(export["with"]["app-name"], "${{ inputs.app-name }}")
                 self.assertEqual(export["with"]["version"], "${{ needs.version.outputs.version }}")
                 self.assertEqual(export["with"]["date"], "${{ needs.version.outputs.date }}")

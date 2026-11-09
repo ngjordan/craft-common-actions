@@ -19,7 +19,7 @@ import subprocess
 import sys
 import tomllib
 
-DEFAULT_PREFIX = "git+https://github.com/storytold/"
+DEFAULT_PREFIX = "git+https://github.com/ngjordan/"
 CONFIGS = (".cargo/config", ".cargo/config.toml")
 
 

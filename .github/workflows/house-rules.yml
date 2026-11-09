@@ -4,7 +4,7 @@ name: House rules
 # on main. An intact older copy warns and does not fail. Callers run it beside their gate:
 #
 #   house-rules:
-#     uses: storytold/craft-common-actions/.github/workflows/house-rules.yml@main
+#     uses: ngjordan/craft-common-actions/.github/workflows/house-rules.yml@main
 #     with:
 #       rust: true
 on:
@@ -40,7 +40,7 @@ jobs:
           path: .craft-contrib
           fetch-depth: 0
           persist-credentials: false
-      - uses: storytold/craft-common-actions/actions/house-rules@main
+      - uses: ngjordan/craft-common-actions/actions/house-rules@main
         with:
           working-directory: ${{ inputs.working-directory }}
           source: .craft-contrib

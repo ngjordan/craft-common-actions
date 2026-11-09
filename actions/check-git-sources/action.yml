@@ -11,12 +11,12 @@ inputs:
   allowed-prefix:
     description: "The Cargo.lock source prefix every git dependency must have"
     required: false
-    default: "git+https://github.com/storytold/"
+    default: "git+https://github.com/ngjordan/"
 
 runs:
   using: composite
   steps:
-    - name: Git dependencies come from storytold
+    - name: Git dependencies come from ngjordan
       shell: bash
       env:
         CHECK_PATH: ${{ github.action_path }}/check_git_sources.py
