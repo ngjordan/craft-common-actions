@@ -80,7 +80,7 @@ class CheckGitSourcesTests(unittest.TestCase):
         self.write("Cargo.lock", lock(REGISTRY, STORYTOLD))
         result = self.check()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("Git dependencies all come from https://github.com/storytold/", result.stdout)
+        self.assertIn("Git dependencies all come from https://github.com/ngjordan/", result.stdout)
         self.assertEqual(self.calls.read_text().splitlines(), ["metadata --locked --format-version 1"])
 
     def test_a_missing_lock_file_fails(self):
@@ -92,13 +92,13 @@ class CheckGitSourcesTests(unittest.TestCase):
         self.write("Cargo.lock", lock(STORYTOLD, *others))
         result = self.check()
         for source in others:
-            self.assertFails(result, f"git dependency outside https://github.com/storytold/: {source}")
+            self.assertFails(result, f"git dependency outside https://github.com/ngjordan/: {source}")
         self.assertNotIn("craft-libs", result.stdout)
 
     def test_a_look_alike_owner_is_not_storytold(self):
-        for source in ("git+https://github.com/storytold-mirror/craft-libs#abc",
-                       "git+https://github.com/storytold.evil/craft-libs#abc",
-                       "git+http://github.com/storytold/craft-libs#abc"):
+        for source in ("git+https://github.com/ngjordan-mirror/craft-libs#abc",
+                       "git+https://github.com/ngjordan.evil/craft-libs#abc",
+                       "git+http://github.com/ngjordan/craft-libs#abc"):
             with self.subTest(source=source):
                 self.write("Cargo.lock", lock(source))
                 self.assertFails(self.check(), source)
