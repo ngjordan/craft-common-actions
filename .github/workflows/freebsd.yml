@@ -10,7 +10,7 @@ on:
         default: ""
       craft-fonts-ref:
         # The suite's craft-fonts pin, as in release.yml.
-        description: "The commit ref for storytold/craft-fonts. Defaults to the suite's pin; empty builds without craft-fonts"
+        description: "The commit ref for ngjordan/craft-fonts. Defaults to the suite's pin; empty builds without craft-fonts"
         type: string
         required: false
         default: "bfcbf714e45a3ea8e98f88ab2b7971372a576414"

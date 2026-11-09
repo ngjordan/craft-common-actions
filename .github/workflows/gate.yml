@@ -29,7 +29,7 @@ on:
         default: '["ubuntu-24.04"]'
       craft-fonts-ref:
         # The suite's craft-fonts pin, as in release.yml and freebsd.yml.
-        description: "The commit of storytold/craft-fonts the tests build with. Defaults to the suite's pin; empty builds without craft-fonts"
+        description: "The commit of ngjordan/craft-fonts the tests build with. Defaults to the suite's pin; empty builds without craft-fonts"
         type: string
         required: false
         default: "bfcbf714e45a3ea8e98f88ab2b7971372a576414"
@@ -126,7 +126,7 @@ jobs:
         if: inputs.craft-fonts-ref != ''
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: storytold/craft-fonts
+          repository: ngjordan/craft-fonts
           ref: ${{ inputs.craft-fonts-ref }}
           path: craft-fonts
           persist-credentials: false

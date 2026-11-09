@@ -742,7 +742,7 @@ bounds each platform build; the manifest merge has its own 15-minute limit.
 
 Individual actions are also available for composing custom pipelines:
 
-- `actions/checkout-craft-fonts`: Checks out `storytold/craft-fonts` at a designated ref.
+- `actions/checkout-craft-fonts`: Checks out `ngjordan/craft-fonts` at a designated ref.
 - `actions/checkout-craft-i18n`: Checks out `storytold/craft-i18n` at the caller's `craft-i18n.rev`, if any, and sets `CRAFT_I18N_DIR` and `CRAFT_I18N_REQUIRED=1`.
 - `actions/resolve-version`: Slices version from `packaging/env.sh` and validates format.
 - `actions/install-wix`: Installs WiX toolset and UI/Util extensions.
